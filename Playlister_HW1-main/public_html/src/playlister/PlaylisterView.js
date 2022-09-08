@@ -117,7 +117,7 @@ export default class PlaylisterView {
             let songNum= document.createTextNode((i+1)+".");
             const songLink=document.createElement("a");
             let itemText = document.createTextNode(song.title + " by " + song.artist);
-            songLink.href="https://www.youtube.com/watch?"+song.id;
+            songLink.href="https://www.youtube.com/watch?v="+song.youTubeId;
             songLink.target="_blank";
             songLink.appendChild(itemText);
 
