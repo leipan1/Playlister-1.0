@@ -84,6 +84,14 @@ export default class PlaylisterModel {
         this.deleteListId = initId;
     }
 
+    setCurrentSongID(id){
+        this.currentSongID = id;
+    }
+
+    getCurrentSongID(){
+        return this.currentSongID;
+    }
+
     toggleConfirmDialogOpen() {
         this.confirmDialogOpen = !this.confirmDialogOpen;
         this.view.updateToolbarButtons(this);
@@ -214,6 +222,32 @@ export default class PlaylisterModel {
             this.view.updateStatusBar(this);
         }
     }
+
+    renameSong(newTitle, newArtist, newYTID, id){
+        let targetSong=this.getSong(id);
+        if(newTitle=== ""){
+            targetSong.title="Untitled";
+        }else{
+            targetSong.title=newTitle;
+        }
+
+        
+        if(newArtist=== ""){
+            targetSong.artist="Unknown";
+        }else{
+            targetSong.artist=newArtist;
+        }
+
+
+        if(newYTID=== ""){
+            targetSong.youTubeId="dQw4w9WgXcQ&ab_channel=RickAstley";
+        }else{
+            targetSong.youTubeId=newYTID;
+        }
+
+        this.view.refreshPlaylist(this.currentList);
+    }
+
 
     deleteList(id) {
         let toBeDeleted = this.playlists[this.getListIndex(id)];

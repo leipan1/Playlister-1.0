@@ -107,7 +107,35 @@ export default class PlaylisterController {
             // CLOSE THE MODAL
             let deleteListModal = document.getElementById("delete-list-modal");
             deleteListModal.classList.remove("is-visible");
-        }        
+        }    
+        
+        // RESPONDS TO USER CONFIRMING SONG EDIT
+        let editSongConfirmButton = document.getElementById("edit-song-confirm-button");
+        editSongConfirmButton.onclick = (event) =>{
+                this.model.toggleConfirmDialogOpen();
+
+                let getTitle= document.getElementById("title-input").value;
+                let getArtist= document.getElementById("artist-input").value;
+                let getYTID= document.getElementById("YTID-input").value;
+
+                console.log(getTitle);
+                console.log(getArtist);
+                console.log(getYTID);
+
+                this.model.renameSong(getTitle,getArtist,getYTID,this.model.getCurrentSongID());
+
+
+                let editSongModal=document.getElementById("edit-song-modal");
+                editSongModal.classList.remove("is-visible");
+        }
+
+        //RESPONDS TO USER CANCELING SONG EDIT
+        let editSongCancelButton = document.getElementById("edit-song-cancel-button");
+        editSongCancelButton.onclick = (event) =>{
+            this.model.toggleConfirmDialogOpen();
+            let editSongModal=document.getElementById("edit-song-modal");
+            editSongModal.classList.remove("is-visible");
+        }
     }
 
     /*
@@ -189,22 +217,7 @@ export default class PlaylisterController {
             textInput.value = temp;
         }
 
-        /**         
-        //RENAMING THE THE SONG NAME
-        document.getElementById("song-card-text-" + id).ondblclick = (event) =>{
-            let text= document.getElementById("song-card-text-"+id)
-            text.innerHTML="";
 
-            let textInput= document.createElement("input");
-            textInput.setAttribute("type", "text");
-            textInput.setAttribute("id", "song-card-text-input-"+ id);
-            textInput.setAttribute("value", this.model.currentList)
-
-
-
-
-        }
-        */
     }
 
     /*
@@ -260,7 +273,67 @@ export default class PlaylisterController {
                     this.model.addMoveSongTransaction(fromIndex, toIndex);
                 }
             }
+
+    
+            //RENAMING SONG NAME
+            card.ondblclick = (event) => {
+
+                this.model.setCurrentSongID(i);
+                //let layout=document.getElementById("modal-center").style.gridTemplateColumns="auto auto";
+                let layout=document.getElementsByClassName("modal-center");
+                layout[1].style.gridTemplateColumns="auto auto";
+
+
+                let titleInput=document.getElementById("title-input").value=this.model.getSong(i).title;
+                
+                let artistInput=document.getElementById("artist-input").value=this.model.getSong(i).artist;
+
+                let YTIDInput=document.getElementById("YTID-input").value=this.model.getSong(i).youTubeId;
+
+
+
+                // let editName=document.getElementById("modal-center-title");
+                // //let nameInput=document.createElement("input");
+                // //nameInput.setAttribute("type","text");
+                // //nameInput.setAttribute("value",this.model.getSong(i).title);
+                // //nameInput.style.width= "100%";
+                // //editName.appendChild(nameInput);
+                // this.model.refreshToolbar();
+                // // nameInput.ondblclick= (event) =>{
+                // //     this.ignoreParentClick(event);
+                // // }
+                
+                // // let editArtist=document.getElementById("modal-center-artist");
+                // // let artistInput=document.createElement("input");
+                // // artistInput.setAttribute("type","text");
+                // // artistInput.setAttribute("value", this.model.getSong(i).artist);
+                // // artistInput.style.width= "100%";
+                // // editArtist.appendChild(artistInput);
+                // // this.model.refreshToolbar();
+                // // artistInput.ondblclick= (event) =>{
+                // //     this.ignoreParentClick(event);
+                // // }
+
+                // // let editYTID=document.getElementById("modal-center-youtubeid");
+                // // let YTIDInput=document.createElement("input");
+                // // YTIDInput.setAttribute("type","text");
+                // // YTIDInput.setAttribute("value", this.model.getSong(i).youTubeId);
+                // // YTIDInput.style.width= "100%";
+                // // editYTID.appendChild(YTIDInput);
+                // // this.model.refreshToolbar();
+                // // YTIDInput.ondblclick= (event) =>{
+                // //     this.ignoreParentClick(event);
+                // // }
+
+                
+                let editSongModal= document.getElementById("edit-song-modal");
+
+                editSongModal.classList.add("is-visible");
+                this.model.toggleConfirmDialogOpen();
+            }
+
         }
+
     }
 
     /*
