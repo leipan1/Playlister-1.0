@@ -51,6 +51,12 @@ export default class PlaylisterController {
             this.model.loadList(newList.id);
             this.model.saveLists();
         }
+
+        //HANDLER FOR ADD SONG BUTTON
+        document.getElementById("add-song-button").onmousedown = (event) => {
+            this.model.addSong();
+        }
+
         // HANDLER FOR UNDO BUTTON
         document.getElementById("undo-button").onmousedown = (event) => {
             this.model.undo();
@@ -182,6 +188,23 @@ export default class PlaylisterController {
             textInput.value = "";
             textInput.value = temp;
         }
+
+        /**         
+        //RENAMING THE THE SONG NAME
+        document.getElementById("song-card-text-" + id).ondblclick = (event) =>{
+            let text= document.getElementById("song-card-text-"+id)
+            text.innerHTML="";
+
+            let textInput= document.createElement("input");
+            textInput.setAttribute("type", "text");
+            textInput.setAttribute("id", "song-card-text-input-"+ id);
+            textInput.setAttribute("value", this.model.currentList)
+
+
+
+
+        }
+        */
     }
 
     /*

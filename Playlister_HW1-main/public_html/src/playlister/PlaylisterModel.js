@@ -244,6 +244,20 @@ export default class PlaylisterModel {
         this.saveLists();
     }
 
+    addSong(){
+        let thisList= this.currentList;
+        let addSong={
+            title: "untitled",
+            artist: "unknown",
+            youTubeId: "dQw4w9WgXcQ&ab_channel=RickAstley",
+            number: thisList.songs.length+1,
+        }
+        thisList.songs.push(addSong);
+        this.view.refreshPlaylist(thisList);
+        
+    }
+
+
     // SIMPLE UNDO/REDO FUNCTIONS, NOTE THESE USE TRANSACTIONS
 
     undo() {
