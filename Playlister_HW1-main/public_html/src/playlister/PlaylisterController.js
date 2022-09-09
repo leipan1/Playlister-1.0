@@ -290,44 +290,9 @@ export default class PlaylisterController {
 
                 let YTIDInput=document.getElementById("YTID-input").value=this.model.getSong(i).youTubeId;
 
-
-
-                // let editName=document.getElementById("modal-center-title");
-                // //let nameInput=document.createElement("input");
-                // //nameInput.setAttribute("type","text");
-                // //nameInput.setAttribute("value",this.model.getSong(i).title);
-                // //nameInput.style.width= "100%";
-                // //editName.appendChild(nameInput);
-                // this.model.refreshToolbar();
-                // // nameInput.ondblclick= (event) =>{
-                // //     this.ignoreParentClick(event);
-                // // }
-                
-                // // let editArtist=document.getElementById("modal-center-artist");
-                // // let artistInput=document.createElement("input");
-                // // artistInput.setAttribute("type","text");
-                // // artistInput.setAttribute("value", this.model.getSong(i).artist);
-                // // artistInput.style.width= "100%";
-                // // editArtist.appendChild(artistInput);
-                // // this.model.refreshToolbar();
-                // // artistInput.ondblclick= (event) =>{
-                // //     this.ignoreParentClick(event);
-                // // }
-
-                // // let editYTID=document.getElementById("modal-center-youtubeid");
-                // // let YTIDInput=document.createElement("input");
-                // // YTIDInput.setAttribute("type","text");
-                // // YTIDInput.setAttribute("value", this.model.getSong(i).youTubeId);
-                // // YTIDInput.style.width= "100%";
-                // // editYTID.appendChild(YTIDInput);
-                // // this.model.refreshToolbar();
-                // // YTIDInput.ondblclick= (event) =>{
-                // //     this.ignoreParentClick(event);
-                // // }
-
                 
                 let editSongModal= document.getElementById("edit-song-modal");
-
+                
                 editSongModal.classList.add("is-visible");
                 this.model.toggleConfirmDialogOpen();
             }
