@@ -136,6 +136,24 @@ export default class PlaylisterController {
             let editSongModal=document.getElementById("edit-song-modal");
             editSongModal.classList.remove("is-visible");
         }
+
+        //RESPONDS TO USER CONFIRMING DELETE SONG
+        let deleteSongConfirmButton= document.getElementById("delete-song-confirm-button");
+        deleteSongConfirmButton.onclick= (event) => {
+            let deleteSongId= this.model.getCurrentSongID();
+            this.model.deleteSong(deleteSongId);
+            this.model.toggleConfirmDialogOpen();
+            let deleteSongModal= document.getElementById("delete-song-modal");
+            deleteSongModal.classList.remove("is-visible");
+        }
+
+        //RESPONDS TO USER CANCELING DELETE SONG
+        let deleteSongCancelButton=document.getElementById("delete-song-cancel-button");
+        deleteSongCancelButton.onclick=(event) => {
+            this.model.toggleConfirmDialogOpen();
+            let deleteSongModal=document.getElementById("delete-song-modal");
+            deleteSongModal.classList.remove("is-visible");
+        }
     }
 
     /*
@@ -274,6 +292,23 @@ export default class PlaylisterController {
                 }
             }
 
+            //HANDLES DELETING A SONG
+            document.getElementById("delete-song-"+i).onmousedown = (event) =>{
+                this.ignoreParentClick(event);
+                this.model.setCurrentSongID(i);
+                let songTitle=this.model.getSong(i).title;
+                let deleteSpan=document.getElementById("delete-song-span");
+                deleteSpan.innerHTML="";
+
+                deleteSpan.appendChild(document.createTextNode(songTitle));
+
+                let deleteSongModal= document.getElementById("delete-song-modal");
+
+                deleteSongModal.classList.add("is-visible");
+                this.model.toggleConfirmDialogOpen();
+            }
+
+
     
             //RENAMING SONG NAME
             card.ondblclick = (event) => {
@@ -292,7 +327,7 @@ export default class PlaylisterController {
 
                 
                 let editSongModal= document.getElementById("edit-song-modal");
-                
+
                 editSongModal.classList.add("is-visible");
                 this.model.toggleConfirmDialogOpen();
             }

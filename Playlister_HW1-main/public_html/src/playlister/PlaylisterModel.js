@@ -266,6 +266,15 @@ export default class PlaylisterModel {
         this.saveLists();
     }
 
+    deleteSong(id){
+        this.currentList.songs= this.currentList.songs.filter((song, index) => index!= id);
+        this.view.refreshPlaylist(this.currentList);
+        for(let i=0;i<this.currentList.songs.length;i++){
+            console.log("title:"+this.currentList.getSongAt(i).title);
+        }
+        this.saveLists();
+    }
+
     // NEXT WE HAVE THE FUNCTIONS THAT ACTUALLY UPDATE THE LOADED LIST
 
     moveSong(fromIndex, toIndex) {

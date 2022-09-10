@@ -122,8 +122,24 @@ export default class PlaylisterView {
             songLink.target="_blank";
             songLink.appendChild(itemText);
 
+            //MAKE THE TEXT SPAN
+            let textSpan=document.createElement("span");
+            textSpan.setAttribute("id","song-card-text-"+i);
+            textSpan.setAttribute("class", "song-card-text");
+            textSpan.appendChild(document.createTextNode(song.title));
+
+            //MAKE DELETE SONG BUTTON FOR THIS CARD
+            let deleteSongButton= document.createElement("input");
+            deleteSongButton.setAttribute("type","button");
+            deleteSongButton.setAttribute("id","delete-song-"+i);
+            deleteSongButton.setAttribute("class","song-card-button");
+            deleteSongButton.setAttribute("value","x");
+            deleteSongButton.style.float="right";
+
             itemDiv.appendChild(songNum);
             itemDiv.appendChild(songLink);
+
+            itemDiv.appendChild(deleteSongButton);
 
             // AND PUT THE CARD INTO THE UI
             itemsDiv.appendChild(itemDiv);
