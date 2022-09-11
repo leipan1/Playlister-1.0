@@ -34,4 +34,10 @@ export default class Playlist {
     moveSong(oldIndex, newIndex) {
         this.songs.splice(newIndex, 0, this.songs.splice(oldIndex, 1)[0]);
     }
+
+    editSong(oldTitle,oldArtist,oldYTID,newTitle,newArtist,newYTID,id){
+        this.song[id].title=newTitle;
+        this.song[id].artist=newArtist;
+        this.song[id].youTubeId=newYTID;
+    }
 }

@@ -1,5 +1,6 @@
 import jsTPS from "../common/jsTPS.js";
 import Playlist from "./Playlist.js";
+import EditSong_Transaction from "./transactions/EditSong_Transaction.js";
 import MoveSong_Transaction from "./transactions/MoveSong_Transaction.js";
 
 /**
@@ -92,9 +93,35 @@ export default class PlaylisterModel {
         return this.currentSongID;
     }
 
+    setOldTitle(title){
+        this.oldTitle=title;
+    }
+
+    setOldArtist(artist){
+        this.oldArtist=artist;
+    }
+
+    setOldYTID(YTID){
+        this.oldYTID=YTID;
+    }
+
+    getOldTitle(){
+        return this.oldTitle;
+    }
+
+    getOldArtist(){
+        return this.oldArtist;
+    }
+    
+    getOldYTID(){
+        return this.oldYTID;
+    }
+
+
     toggleConfirmDialogOpen() {
         this.confirmDialogOpen = !this.confirmDialogOpen;
-        this.view.updateToolbarButtons(this);
+        // PLEASE FIX LATER TO DO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        //this.view.updateToolbarButtons(this);
         return this.confirmDialogOpen;
     }
 
@@ -230,7 +257,6 @@ export default class PlaylisterModel {
         }else{
             targetSong.title=newTitle;
         }
-
         
         if(newArtist=== ""){
             targetSong.artist="Unknown";
@@ -322,6 +348,12 @@ export default class PlaylisterModel {
 
     addMoveSongTransaction(fromIndex, onIndex) {
         let transaction = new MoveSong_Transaction(this, fromIndex, onIndex);
+        this.tps.addTransaction(transaction);
+        this.view.updateToolbarButtons(this);
+    }
+
+    addEditSongTransaction(initOldTitle,initOldArtist,initOldYTID,initNewTitle, initNewArtist, initNewYTID, ID){
+        let transaction= new EditSong_Transaction(this, initOldTitle,initOldArtist,initOldYTID,initNewTitle, initNewArtist, initNewYTID,ID);
         this.tps.addTransaction(transaction);
         this.view.updateToolbarButtons(this);
     }

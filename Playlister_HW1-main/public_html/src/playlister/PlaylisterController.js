@@ -118,11 +118,10 @@ export default class PlaylisterController {
                 let getArtist= document.getElementById("artist-input").value;
                 let getYTID= document.getElementById("YTID-input").value;
 
-                console.log(getTitle);
-                console.log(getArtist);
-                console.log(getYTID);
+                //this.model.renameSong(getTitle,getArtist,getYTID,this.model.getCurrentSongID());
 
-                this.model.renameSong(getTitle,getArtist,getYTID,this.model.getCurrentSongID());
+
+                this.model.addEditSongTransaction(this.model.getOldTitle(),this.model.getOldArtist(), this.model.getOldYTID(),getTitle,getArtist,getYTID,this.model.getCurrentSongID());
 
 
                 let editSongModal=document.getElementById("edit-song-modal");
@@ -310,8 +309,17 @@ export default class PlaylisterController {
 
 
     
-            //RENAMING SONG NAME
+            //EDITING SONG NAME
             card.ondblclick = (event) => {
+
+                // let oldTitle=this.model.getSong(i).title;
+                // let oldArtist=this.model.getSong(i).artist;
+                // let oldYTID= this.model.getSong(i).youTubeId;
+
+                this.model.setOldTitle(this.model.getSong(i).title);
+                this.model.setOldArtist(this.model.getSong(i).artist);
+                this.model.setOldYTID(this.model.getSong(i).youTubeId);
+
 
                 this.model.setCurrentSongID(i);
                 //let layout=document.getElementById("modal-center").style.gridTemplateColumns="auto auto";
