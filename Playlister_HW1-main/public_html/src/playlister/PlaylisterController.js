@@ -54,7 +54,8 @@ export default class PlaylisterController {
 
         //HANDLER FOR ADD SONG BUTTON
         document.getElementById("add-song-button").onmousedown = (event) => {
-            this.model.addSong();
+            this.model.addAddSongTransaction(this.model.getPlaylistSize());
+            
         }
 
         // HANDLER FOR UNDO BUTTON
@@ -140,7 +141,13 @@ export default class PlaylisterController {
         let deleteSongConfirmButton= document.getElementById("delete-song-confirm-button");
         deleteSongConfirmButton.onclick= (event) => {
             let deleteSongId= this.model.getCurrentSongID();
-            this.model.deleteSong(deleteSongId);
+            console.log("current song index:"+deleteSongId);
+            let getTitle= this.model.getSong(deleteSongId).title;
+            let getArtist= this.model.getSong(deleteSongId).artist;
+            let getYTID= this.model.getSong(deleteSongId).youTubeId;
+
+            this.model.addDeleteSongTransaction(getTitle,getArtist,getYTID,deleteSongId);
+
             this.model.toggleConfirmDialogOpen();
             let deleteSongModal= document.getElementById("delete-song-modal");
             deleteSongModal.classList.remove("is-visible");
@@ -293,6 +300,10 @@ export default class PlaylisterController {
 
             //HANDLES DELETING A SONG
             document.getElementById("delete-song-"+i).onmousedown = (event) =>{
+                this.model.setOldTitle(this.model.getSong(i).title);
+                this.model.setOldArtist(this.model.getSong(i).artist);
+                this.model.setOldYTID(this.model.getSong(i).youTubeId);
+
                 this.ignoreParentClick(event);
                 this.model.setCurrentSongID(i);
                 let songTitle=this.model.getSong(i).title;

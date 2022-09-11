@@ -1,5 +1,7 @@
 import jsTPS from "../common/jsTPS.js";
 import Playlist from "./Playlist.js";
+import AddSong_Transaction from "./transactions/AddSong_Transaction.js";
+import DeleteSong_Transaction from "./transactions/DeleteSong_Transaction.js";
 import EditSong_Transaction from "./transactions/EditSong_Transaction.js";
 import MoveSong_Transaction from "./transactions/MoveSong_Transaction.js";
 
@@ -188,7 +190,7 @@ export default class PlaylisterModel {
         }
         this.tps.clearAllTransactions();
         this.view.updateStatusBar(this);
-        this.view.updateToolbarButtons(this);
+        //this.view.updateToolbarButtons(this);
     }
 
     loadLists() {
@@ -229,7 +231,7 @@ export default class PlaylisterModel {
             this.view.updateStatusBar(this);
             this.view.clearWorkspace();
             this.tps.clearAllTransactions();
-            this.view.updateToolbarButtons(this);
+            //this.view.updateToolbarButtons(this);
         }
     }
 
@@ -319,7 +321,7 @@ export default class PlaylisterModel {
             title: "untitled",
             artist: "unknown",
             youTubeId: "dQw4w9WgXcQ&ab_channel=RickAstley",
-            number: thisList.songs.length+1,
+            //number: thisList.songs.length+1,
         }
         thisList.songs.push(addSong);
         this.view.refreshPlaylist(thisList);
@@ -349,12 +351,24 @@ export default class PlaylisterModel {
     addMoveSongTransaction(fromIndex, onIndex) {
         let transaction = new MoveSong_Transaction(this, fromIndex, onIndex);
         this.tps.addTransaction(transaction);
-        this.view.updateToolbarButtons(this);
+        //this.view.updateToolbarButtons(this);
     }
 
     addEditSongTransaction(initOldTitle,initOldArtist,initOldYTID,initNewTitle, initNewArtist, initNewYTID, ID){
         let transaction= new EditSong_Transaction(this, initOldTitle,initOldArtist,initOldYTID,initNewTitle, initNewArtist, initNewYTID,ID);
         this.tps.addTransaction(transaction);
-        this.view.updateToolbarButtons(this);
+        //this.view.updateToolbarButtons(this);
+    }
+
+    addAddSongTransaction(id){
+        let transaction= new AddSong_Transaction(this, id);
+        this.tps.addTransaction(transaction);
+        //this.view.updateToolbarButtons(this);
+    }
+
+    addDeleteSongTransaction(title,artist,YTID,id){
+        let transaction= new DeleteSong_Transaction(this, title,artist,YTID,id);
+        this.tps.addTransaction(transaction);
+        //this.view.updateToolbarButtons(this);
     }
 }
