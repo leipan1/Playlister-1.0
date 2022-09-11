@@ -141,9 +141,11 @@ export default class jsTPS {
                     this.transactions.splice(i, 1);
                 }
                 this.numTransactions = this.mostRecentTransaction + 2;
+                console.log("added transaction if");
         }
         else {
             this.numTransactions++;
+            console.log("added transaction else");
         }
 
         // ADD THE TRANSACTION

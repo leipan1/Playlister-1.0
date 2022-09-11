@@ -122,8 +122,7 @@ export default class PlaylisterModel {
 
     toggleConfirmDialogOpen() {
         this.confirmDialogOpen = !this.confirmDialogOpen;
-        // PLEASE FIX LATER TO DO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        //this.view.updateToolbarButtons(this);
+        this.view.updateToolbarButtons(this);
         return this.confirmDialogOpen;
     }
 
@@ -190,7 +189,7 @@ export default class PlaylisterModel {
         }
         this.tps.clearAllTransactions();
         this.view.updateStatusBar(this);
-        //this.view.updateToolbarButtons(this);
+        this.view.updateToolbarButtons(this);
     }
 
     loadLists() {
@@ -231,7 +230,7 @@ export default class PlaylisterModel {
             this.view.updateStatusBar(this);
             this.view.clearWorkspace();
             this.tps.clearAllTransactions();
-            //this.view.updateToolbarButtons(this);
+            this.view.updateToolbarButtons(this);
         }
     }
 
@@ -351,24 +350,24 @@ export default class PlaylisterModel {
     addMoveSongTransaction(fromIndex, onIndex) {
         let transaction = new MoveSong_Transaction(this, fromIndex, onIndex);
         this.tps.addTransaction(transaction);
-        //this.view.updateToolbarButtons(this);
+        this.view.updateToolbarButtons(this);
     }
 
     addEditSongTransaction(initOldTitle,initOldArtist,initOldYTID,initNewTitle, initNewArtist, initNewYTID, ID){
         let transaction= new EditSong_Transaction(this, initOldTitle,initOldArtist,initOldYTID,initNewTitle, initNewArtist, initNewYTID,ID);
         this.tps.addTransaction(transaction);
-        //this.view.updateToolbarButtons(this);
+        this.view.updateToolbarButtons(this);
     }
 
     addAddSongTransaction(id){
         let transaction= new AddSong_Transaction(this, id);
         this.tps.addTransaction(transaction);
-        //this.view.updateToolbarButtons(this);
+        this.view.updateToolbarButtons(this);
     }
 
     addDeleteSongTransaction(title,artist,YTID,id){
         let transaction= new DeleteSong_Transaction(this, title,artist,YTID,id);
         this.tps.addTransaction(transaction);
-        //this.view.updateToolbarButtons(this);
+        this.view.updateToolbarButtons(this);
     }
 }

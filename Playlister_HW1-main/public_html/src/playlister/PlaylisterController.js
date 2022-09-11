@@ -70,6 +70,7 @@ export default class PlaylisterController {
         document.getElementById("close-button").onmousedown = (event) => {
             this.model.unselectAll();
             this.model.unselectCurrentList();
+            this.model.view.updateToolbarButtons(this.model);
         }
     }
 
@@ -97,6 +98,7 @@ export default class PlaylisterController {
             // CLOSE THE MODAL
             let deleteListModal = document.getElementById("delete-list-modal");
             deleteListModal.classList.remove("is-visible");
+            this.model.view.updateToolbarButtons(this.model);
         }
 
         // RESPOND TO THE USER CLOSING THE DELETE PLAYLIST MODAL
@@ -181,6 +183,8 @@ export default class PlaylisterController {
 
             // GET THE SELECTED LIST
             this.model.loadList(id);
+            
+            
         }
         // HANDLES DELETING A PLAYLIST
         document.getElementById("delete-list-" + id).onmousedown = (event) => {
