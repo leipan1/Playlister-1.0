@@ -317,8 +317,8 @@ export default class PlaylisterModel {
     addSong(){
         let thisList= this.currentList;
         let addSong={
-            title: "untitled",
-            artist: "unknown",
+            title: "Untitled",
+            artist: "Unknown",
             youTubeId: "dQw4w9WgXcQ&ab_channel=RickAstley",
             //number: thisList.songs.length+1,
         }

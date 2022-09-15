@@ -227,7 +227,7 @@ export default class PlaylisterView {
             this.disableButton("close-button");
         }
         else if(model.hasCurrentList()){
-            this.enableButton("add-list-button")
+            this.disableButton("add-list-button")
             this.enableButton("add-song-button");
             this.enableButton("close-button");
             if(tps.hasTransactionToUndo()){
